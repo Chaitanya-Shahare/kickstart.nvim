@@ -127,7 +127,7 @@ return {
         {
           name = 'personal',
           -- path = '/Users/chaitanyashahare/Library/Mobile Documents/iCloud~md~obsidian/Documents/vimwiki',
-          path = '~/Documents/vimwiki/',
+          path = '~/Documents/Personal/personal-wiki/',
         },
       },
 
@@ -310,4 +310,28 @@ let g:closetag_filetypes = 'html,xhtml,jsx,javascript,typescript.tsx'
       require('ufo').setup(opts)
     end,
   },
+  {
+    'pwntester/octo.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      -- OR 'ibhagwan/fzf-lua',
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require('octo').setup()
+    end,
+  },
+  -- {
+  --  'pwntester/octo.nvim',
+  --  requires = {
+  --    'nvim-lua/plenary.nvim',
+  --    'nvim-telescope/telescope.nvim',
+  --    -- OR 'ibhagwan/fzf-lua',
+  --    'nvim-tree/nvim-web-devicons',
+  --  },
+  --  config = function ()
+  --    require"octo".setup()
+  --  end
+  -- }
 }

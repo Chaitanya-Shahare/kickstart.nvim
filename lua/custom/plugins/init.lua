@@ -165,8 +165,13 @@ return {
   --   'ekickx/clipboard-image.nvim',
   -- },
   {
-
     'rose-pine/neovim',
+  },
+  {
+    'ellisonleao/gruvbox.nvim',
+  },
+  {
+    'Mofiqul/vscode.nvim',
   },
   {
     'shaunsingh/nord.nvim',
@@ -252,14 +257,10 @@ let g:closetag_filetypes = 'html,xhtml,jsx,javascript,typescript.tsx'
   {
     'SmiteshP/nvim-navic',
     config = function()
-      local navic = require 'nvim-navic'
-
-      require('lspconfig').clangd.setup {
-        on_attach = function(client, bufnr)
-          if client.server_capabilities.documentSymbolProvider then
-            navic.attach(client, bufnr)
-          end
-        end,
+      require('nvim-navic').setup {
+        lsp = {
+          auto_attach = true,
+        },
       }
     end,
   },
@@ -322,16 +323,13 @@ let g:closetag_filetypes = 'html,xhtml,jsx,javascript,typescript.tsx'
       require('octo').setup()
     end,
   },
-  -- {
-  --  'pwntester/octo.nvim',
-  --  requires = {
-  --    'nvim-lua/plenary.nvim',
-  --    'nvim-telescope/telescope.nvim',
-  --    -- OR 'ibhagwan/fzf-lua',
-  --    'nvim-tree/nvim-web-devicons',
-  --  },
-  --  config = function ()
-  --    require"octo".setup()
-  --  end
-  -- }
+  {
+    'LunarVim/breadcrumbs.nvim',
+    dependencies = {
+      { 'SmiteshP/nvim-navic' },
+    },
+    config = function()
+      require('breadcrumbs').setup {}
+    end,
+  },
 }

@@ -165,7 +165,7 @@ vim.opt.colorcolumn = '80'
 vim.opt.wrap = false
 
 -- Set global status lines
-vim.opt['laststatus'] = 3
+-- vim.opt['laststatus'] = 3
 
 -- Set conceallevel to 2 for Obsidian
 -- vim.opt.conceallevel = 2
@@ -424,10 +424,71 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        defaults = {
+          theme = {
+            theme = 'ivy',
+          },
+        },
+        pickers = {
+          find_files = {
+            theme = 'ivy',
+          },
+          live_grep = {
+            theme = 'ivy',
+          },
+          lsp_references = {
+            theme = 'ivy',
+          },
+          lsp_code_actions = {
+            theme = 'cursor',
+          },
+          lsp_definitions = {
+            theme = 'ivy',
+          },
+          lsp_implementations = {
+            theme = 'ivy',
+          },
+          lsp_type_definitions = {
+            theme = 'ivy',
+          },
+          lsp_document_symbols = {
+            theme = 'ivy',
+          },
+          lsp_dynamic_workspace_symbols = {
+            theme = 'ivy',
+          },
+          oldfiles = {
+            theme = 'ivy',
+          },
+          buffers = {
+            theme = 'ivy',
+          },
+          git_branches = {
+            theme = 'ivy',
+          },
+          git_status = {
+            theme = 'ivy',
+          },
+          git_commits = {
+            theme = 'ivy',
+          },
+          git_bcommits = {
+            theme = 'ivy',
+          },
+          git_stash = {
+            theme = 'ivy',
+          },
+          git_worktree = {
+            theme = 'ivy',
+          },
+          git_files = {
+            theme = 'ivy',
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
+            require('telescope.themes').get_ivy(),
           },
         },
       }
@@ -629,14 +690,14 @@ require('lazy').setup({
       })
 
       -- Change diagnostic symbols in the sign column (gutter)
-      -- if vim.g.have_nerd_font then
-      --   local signs = { ERROR = '', WARN = '', INFO = '', HINT = '' }
-      --   local diagnostic_signs = {}
-      --   for type, icon in pairs(signs) do
-      --     diagnostic_signs[vim.diagnostic.severity[type]] = icon
-      --   end
-      --   vim.diagnostic.config { signs = { text = diagnostic_signs } }
-      -- end
+      if vim.g.have_nerd_font then
+        local signs = { ERROR = '', WARN = '', INFO = '', HINT = '' }
+        local diagnostic_signs = {}
+        for type, icon in pairs(signs) do
+          diagnostic_signs[vim.diagnostic.severity[type]] = icon
+        end
+        vim.diagnostic.config { signs = { text = diagnostic_signs } }
+      end
 
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP specification.
@@ -894,7 +955,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'gruvbox'
+      vim.cmd.colorscheme 'gruvbox-material'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'

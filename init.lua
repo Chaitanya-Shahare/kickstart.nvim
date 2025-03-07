@@ -185,6 +185,9 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
+vim.keymap.set('n', ']q', '<cmd>cnext<CR>', { desc = 'Next [Q]uickfix' })
+vim.keymap.set('n', '[q', '<cmd>cprevious<CR>', { desc = 'Previous [Q]uickfix' })
+
 -- For pasting without loosing the copied text
 vim.keymap.set('x', '<leader>p', '"_dp')
 
@@ -434,6 +437,9 @@ require('lazy').setup({
             theme = 'ivy',
           },
           live_grep = {
+            theme = 'ivy',
+          },
+          lsp_code_actions = {
             theme = 'ivy',
           },
           lsp_references = {
@@ -955,7 +961,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'gruvbox-material'
+      vim.cmd.colorscheme 'rose-pine'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'

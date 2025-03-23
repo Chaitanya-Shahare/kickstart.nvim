@@ -11,14 +11,19 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '\\', ':Neotree reveal right<CR>', desc = 'NeoTree reveal', silent = true },
+    { '<leader>e', ':Neotree toggle right<CR>', desc = 'NeoTree toggle', silent = true },
   },
   opts = {
     filesystem = {
-      window = {
-        mappings = {
-          ['\\'] = 'close_window',
-        },
+      -- window = {
+      --   mappings = {
+      --     ['\\'] = 'close_window',
+      --   },
+      -- },
+      follow_current_file = {
+        enabled = true, -- This will find and focus the file in the active buffer every time
+        --               -- the current file is changed while the tree is open.
+        leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
       },
     },
   },

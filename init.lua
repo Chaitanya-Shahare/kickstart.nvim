@@ -188,6 +188,12 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('n', ']q', '<cmd>cnext<CR>', { desc = 'Next [Q]uickfix' })
 vim.keymap.set('n', '[q', '<cmd>cprevious<CR>', { desc = 'Previous [Q]uickfix' })
 
+vim.keymap.set('n', 'qo', '<cmd>copen<CR>', { desc = '[Q]uickfix [O]pen' })
+vim.keymap.set('n', 'qc', '<cmd>cclose<CR>', { desc = '[Q]uickfix [C]lose' })
+
+vim.keymap.set('n', '<leader>dd', '<cmd>lua vim.diagnostic.disable()<CR>', { desc = '[D]iagnostics [D]isable' })
+vim.keymap.set('n', '<leader>de', '<cmd>lua vim.diagnostic.enable()<CR>', { desc = '[D]iagnostics [E]nable' })
+
 -- For pasting without loosing the copied text
 vim.keymap.set('x', '<leader>p', '"_dp')
 
@@ -961,7 +967,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'rose-pine'
+      vim.cmd.colorscheme 'gruvbox-material'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
@@ -997,23 +1003,24 @@ require('lazy').setup({
       statusline.setup {
         content = {
           active = function()
-            local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
+            local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 2000 }
             local git = MiniStatusline.section_git { trunc_width = 40 }
             local diff = MiniStatusline.section_diff { trunc_width = 75 }
             local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
             local lsp = MiniStatusline.section_lsp { trunc_width = 75 }
-            local filename = MiniStatusline.section_filename { trunc_width = 1000, relative = true } -- Show relative file path
+            local filename = MiniStatusline.section_filename { trunc_width = 2000, relative = true } -- Show relative file path
             local fileinfo = MiniStatusline.section_fileinfo { trunc_width = 120 }
             local location = MiniStatusline.section_location { trunc_width = 75 }
             local search = MiniStatusline.section_searchcount { trunc_width = 75 }
 
             return MiniStatusline.combine_groups {
               { hl = mode_hl, strings = { mode } },
-              { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
-              '%<', -- Mark general truncate point
+              -- { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
+              { hl = 'MiniStatuslineDevinfo', strings = { git } },
               { hl = 'MiniStatuslineFilename', strings = { filename } },
+              '%<', -- Mark general truncate point
               '%=', -- End left alignment
-              { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+              -- { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
               { hl = mode_hl, strings = { search, location } },
             }
           end,
@@ -1110,3 +1117,14 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+--
+-- NEOVIDE
+if vim.g.neovide == true then
+  vim.api.nvim_set_keymap('n', '<C-=>', ':lua vim.g.neovide_scale_factor = math.min(vim.g.neovide_scale_factor + 0.1,  1.0)<CR>', { silent = true })
+  vim.api.nvim_set_keymap('n', '<C-->', ':lua vim.g.neovide_scale_factor = math.max(vim.g.neovide_scale_factor - 0.1,  0.1)<CR>', { silent = true })
+  vim.api.nvim_set_keymap('n', '<C-+>', ':lua vim.g.neovide_transparency = math.min(vim.g.neovide_transparency + 0.05, 1.0)<CR>', { silent = true })
+  vim.api.nvim_set_keymap('n', '<C-_>', ':lua vim.g.neovide_transparency = math.max(vim.g.neovide_transparency - 0.05, 0.0)<CR>', { silent = true })
+  vim.api.nvim_set_keymap('n', '<C-0>', ':lua vim.g.neovide_scale_factor = 0.5<CR>', { silent = true })
+  vim.api.nvim_set_keymap('n', '<C-)>', ':lua vim.g.neovide_transparency = 0.9<CR>', { silent = true })
+end

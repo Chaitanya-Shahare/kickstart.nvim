@@ -11,15 +11,22 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '<leader>e', ':Neotree toggle right<CR>', desc = 'NeoTree toggle', silent = true },
+    { '<leader>e', ':Neotree toggle<CR>', desc = 'NeoTree toggle', silent = true },
   },
   opts = {
     filesystem = {
-      -- window = {
-      --   mappings = {
-      --     ['\\'] = 'close_window',
-      --   },
-      -- },
+      filtered_items = {
+        hide_dotfiles = false, -- This will show dotfiles
+        hide_gitignored = false, -- This will show gitignored files
+        never_show = { '.DS_Store' }, -- This will never show these files
+      },
+      window = {
+        position = 'right',
+        mappings = {
+          ['l'] = 'open',
+          ['h'] = 'close_node', -- close node
+        },
+      },
       follow_current_file = {
         enabled = true, -- This will find and focus the file in the active buffer every time
         --               -- the current file is changed while the tree is open.

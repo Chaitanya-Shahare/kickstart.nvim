@@ -174,9 +174,9 @@ return {
     },
     keys = {
       { '<leader>op', '<cmd>ObsidianPasteImg<cr>', desc = '[O]bsidian [P]aste Img' },
-      { '<leader>w<leader>w', '<cmd>ObsidianToday<cr>', desc = '[O]bsidian Today' },
-      { '<leader>w<leader>e', '<cmd>ObsidianTomorrow<cr>', desc = '[O]bsidian Tomorrow' },
-      { '<leader>w<leader>q', '<cmd>ObsidianYesterday<cr>', desc = '[O]bsidian Yesterday' },
+      -- { '<leader>w<leader>w', '<cmd>ObsidianToday<cr>', desc = '[O]bsidian Today' },
+      -- { '<leader>w<leader>e', '<cmd>ObsidianTomorrow<cr>', desc = '[O]bsidian Tomorrow' },
+      -- { '<leader>w<leader>q', '<cmd>ObsidianYesterday<cr>', desc = '[O]bsidian Yesterday' },
       { '<leader>ot', '<cmd>ObsidianToggleCheckbox<cr>', desc = '[O]bsidian [T]oggle' },
     },
   },

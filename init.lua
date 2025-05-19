@@ -178,6 +178,14 @@ vim.keymap.set('n', '<leader>gd', '<cmd>Gitsigns diffthis<CR>', { desc = '[G]it 
 vim.keymap.set('n', '<leader>gb', '<cmd>Gitsigns blame_line<CR>', { desc = '[G]it [B]lame line' })
 vim.keymap.set('n', '<leader>gp', '<cmd>Gitsigns preview_hunk_inline<CR>', { desc = '[G]it [P]review hunk inline' })
 
+local function copyRelPath()
+  local relPath = vim.fn.expand '%:.' -- Get the relative path
+  vim.fn.setreg('+', relPath) -- Set the clipboard register
+  print(relPath) -- Print the relative path
+end
+
+vim.keymap.set('n', '<leader>cp', copyRelPath, { desc = '[C]opy [P]ath' })
+
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 

@@ -507,6 +507,7 @@ require('lazy').setup({
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'git_worktree')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -523,6 +524,9 @@ require('lazy').setup({
 
       vim.keymap.set('n', '<leader>so', '<cmd>ObsidianSearch<CR>', { desc = '[S]earch [O]bsidian' })
       vim.keymap.set('n', '<leader>0', '<cmd>CopilotChatToggle<CR>', { desc = 'Toggle Copilot Chat' })
+
+      vim.keymap.set('n', '<leader>sb', require('telescope').extensions.git_worktree.git_worktrees, { desc = '[S]earch Git Worktree' })
+      vim.keymap.set('n', '<leader>sB', require('telescope').extensions.git_worktree.create_git_worktree, { desc = '[S]earch Git Worktree' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -969,11 +973,18 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'gruvbox-material'
+      vim.cmd.colorscheme 'tokyonight-night'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
+    config = {
+      transparent = true,
+      styles = {
+        sidebars = 'transparent',
+        floats = 'transparent',
+      },
+    },
   },
 
   -- Highlight todo, notes, etc in comments
@@ -988,7 +999,13 @@ require('lazy').setup({
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
+      --
+      local gen_spec = require('mini.ai').gen_spec
+      require('mini.ai').setup {
+        n_lines = 500,
+        -- Function definition (needs treesitter queries with these captures)
+        F = gen_spec.treesitter { a = '@function.outer', i = '@function.inner' },
+      }
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --

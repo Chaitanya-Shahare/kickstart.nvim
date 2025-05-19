@@ -17,6 +17,8 @@ return {
     config = function()
       local harpoon = require 'harpoon'
 
+      harpoon:extend(require('harpoon.extensions').builtins.command_on_nav 'UfoEnableFold')
+
       -- REQUIRED
       harpoon:setup {}
       -- REQUIRED
@@ -863,4 +865,11 @@ let g:closetag_filetypes = 'html,xhtml,jsx,javascript,typescript.tsx'
   },
 
   { 'projekt0n/github-nvim-theme', name = 'github-theme' },
+  {
+    'ThePrimeagen/git-worktree.nvim',
+
+    keys = {
+      -- { '<leader>sj', '<cmd>LazyGit<cr>', desc = 'Lazy[G]it' },
+    },
+  },
 }

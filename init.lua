@@ -203,6 +203,8 @@ vim.keymap.set('n', 'qc', '<cmd>cclose<CR>', { desc = '[Q]uickfix [C]lose' })
 vim.keymap.set('n', '<leader>dd', '<cmd>lua vim.diagnostic.disable()<CR>', { desc = '[D]iagnostics [D]isable' })
 vim.keymap.set('n', '<leader>de', '<cmd>lua vim.diagnostic.enable()<CR>', { desc = '[D]iagnostics [E]nable' })
 
+vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<CR>', { desc = '[T]ab [N]ew' })
+
 -- For pasting without loosing the copied text
 vim.keymap.set('x', '<leader>p', '"_dp')
 

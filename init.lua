@@ -221,6 +221,21 @@ vim.keymap.set('n', '<leader>gcp', function()
   vim.notify('GitHub PR URL copied to clipboard', vim.log.levels.INFO)
 end, { desc = '[G]itHub [C]opy [P]R URL', silent = true })
 
+vim.keymap.set('n', '<leader>gf', function()
+  -- Get the relative path of the current file
+  local file_path = vim.fn.expand '%'
+
+  -- Open a vertical split and switch to terminal mode
+  vim.cmd 'vsplit'
+  vim.cmd 'terminal'
+
+  -- Execute the git log command in the terminal
+  vim.fn.feedkeys('igit log --follow -- ' .. file_path .. '\r')
+
+  -- Notify the user
+  vim.notify('Git log command executed for ' .. file_path, vim.log.levels.INFO)
+end, { desc = '[G]it [F]ollow Log File', silent = true })
+
 -- For pasting without loosing the copied text
 vim.keymap.set('x', '<leader>p', '"_dp')
 

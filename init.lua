@@ -204,6 +204,22 @@ vim.keymap.set('n', '<leader>dd', '<cmd>lua vim.diagnostic.disable()<CR>', { des
 vim.keymap.set('n', '<leader>de', '<cmd>lua vim.diagnostic.enable()<CR>', { desc = '[D]iagnostics [E]nable' })
 
 vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<CR>', { desc = '[T]ab [N]ew' })
+vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<CR>', { desc = '[T]ab [C]lose' })
+
+vim.keymap.set('n', '<leader>gcd', function()
+  vim.cmd "silent !gh pr comment -b 'DEPLOY_PEVIEW'"
+  vim.notify('GitHub PR comment added: DEPLOY_PREVIEW', vim.log.levels.INFO)
+end, { desc = '[G]itHub [C]omment [D]eploy preview', silent = true })
+
+vim.keymap.set('n', '<leader>gw', function()
+  vim.cmd 'silent !gh pr view -w'
+  vim.notify('GitHub PR opened in web browser', vim.log.levels.INFO)
+end, { desc = '[G]itHub PR View [W]eb', silent = true })
+
+vim.keymap.set('n', '<leader>gcp', function()
+  vim.cmd 'silent !gh pr view --json url -q .url | pbcopy'
+  vim.notify('GitHub PR URL copied to clipboard', vim.log.levels.INFO)
+end, { desc = '[G]itHub [C]opy [P]R URL', silent = true })
 
 -- For pasting without loosing the copied text
 vim.keymap.set('x', '<leader>p', '"_dp')

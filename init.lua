@@ -207,7 +207,7 @@ vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<CR>', { desc = '[T]ab [N]ew' })
 vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<CR>', { desc = '[T]ab [C]lose' })
 
 vim.keymap.set('n', '<leader>gcd', function()
-  vim.cmd "silent !gh pr comment -b 'DEPLOY_PEVIEW'"
+  vim.cmd "silent !gh pr comment -b 'DEPLOY_PREVIEW'"
   vim.notify('GitHub PR comment added: DEPLOY_PREVIEW', vim.log.levels.INFO)
 end, { desc = '[G]itHub [C]omment [D]eploy preview', silent = true })
 

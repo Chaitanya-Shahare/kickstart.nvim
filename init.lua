@@ -221,6 +221,11 @@ vim.keymap.set('n', '<leader>gcp', function()
   vim.notify('GitHub PR URL copied to clipboard', vim.log.levels.INFO)
 end, { desc = '[G]itHub [C]opy [P]R URL', silent = true })
 
+vim.keymap.set('n', '<leader>gcm', function()
+  vim.fn.system 'gh pr view --json title,number,url -q \'"\\(.title) #\\(.number)\\n- PR: \\(.url)"\' | pbcopy'
+  vim.notify('GitHub PR URL Message copied to clipboard', vim.log.levels.INFO)
+end, { desc = '[G]itHub [C]opy [M]essage', silent = true })
+
 vim.keymap.set('n', '<leader>gf', function()
   -- Get the relative path of the current file
   local file_path = vim.fn.expand '%'

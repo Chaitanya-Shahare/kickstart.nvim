@@ -235,7 +235,7 @@ vim.keymap.set('n', '<leader>gf', function()
   vim.cmd 'terminal'
 
   -- Execute the git log command in the terminal
-  vim.fn.feedkeys('igit log --follow -- ' .. file_path .. '\r')
+  vim.fn.feedkeys('igit log --follow -- ' .. file_path .. ' && exit\r')
 
   -- Notify the user
   vim.notify('Git log command executed for ' .. file_path, vim.log.levels.INFO)

@@ -222,7 +222,30 @@ vim.keymap.set('n', '<leader>gcp', function()
 end, { desc = '[G]itHub [C]opy [P]R URL', silent = true })
 
 vim.keymap.set('n', '<leader>gcm', function()
-  vim.fn.system 'gh pr view --json title,number,url -q \'"\\(.title) #\\(.number)\\n- PR: \\(.url)"\' | pbcopy'
+  -- get current branch
+  local branch = vim.fn.systemlist('git rev-parse --abbrev-ref HEAD')[1] or ''
+  -- extract JIRA key like WATCHES-255
+  local issue = branch:match '%u[%u%d]+%-%d+'
+
+  if not issue then
+    vim.notify('No JIRA key found in branch name: ' .. branch, vim.log.levels.ERROR)
+    return
+  end
+
+  -- get the JIRA issue URL from jira-cli output
+  local jira_out = vim.fn.system('jira issue view ' .. issue .. ' --plain')
+  local jira_url = jira_out:match 'https?://%S+'
+  if not jira_url then
+    vim.notify('Could not find JIRA URL in jira-cli output for ' .. issue, vim.log.levels.ERROR)
+    return
+  end
+
+  -- get PR title/number/url from gh
+  local pr_text = vim.fn.system [[gh pr view --json title,number,url -q '"\(.title) #\(.number)\n- PR: \(.url)"']]
+
+  -- build final text and copy to clipboard
+  local final = (pr_text:gsub('%s+$', '')) .. '\n- Jira: ' .. jira_url
+  vim.fn.system('pbcopy', final)
   vim.notify('GitHub PR URL Message copied to clipboard', vim.log.levels.INFO)
 end, { desc = '[G]itHub [C]opy [M]essage', silent = true })
 
@@ -881,7 +904,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        python = { 'black', 'isort' },
+        python = { 'black' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },

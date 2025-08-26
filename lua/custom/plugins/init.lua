@@ -80,8 +80,8 @@ return {
       mappings = {
         -- Use tab for completion
         complete = {
-          detail = 'Use @<Tab> or /<Tab> for options.',
-          insert = '<Tab>',
+          detail = 'Use @<C-Space> or /<C-Space> for options.',
+          insert = '<C-Space>',
         },
         -- Close the chat
         close = {
